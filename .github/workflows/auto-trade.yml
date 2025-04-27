@@ -1,7 +1,8 @@
 name: Auto XT BOT
 on:
   schedule:
-    - cron: '*/30 * * * *' # هر ۳۰ دقیقه یکبار اجرا می‌شود
+    - cron: '*/30 * * * *' # هر ۳۰ دقیقه یکبار اجرا میشه
+  workflow_dispatch: # بتونی دستی هم اجراش کنی
 
 jobs:
   run-bot:
@@ -14,12 +15,15 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.10'
 
       - name: Install dependencies
         run: |
           pip install requests
 
-      - name: Run bot script
+      - name: Run the bot
+        env:
+          XT_API_KEY: ${{ secrets.XT_API_KEY }}
+          XT_API_SECRET: ${{ secrets.XT_API_SECRET }}
         run: |
           python auto_xt_bot.py
