@@ -1,50 +1,25 @@
 name: Auto XT BOT
-
-on: schedule: - cron: '*/30 * * * *' # هر ۳۰ دقیقه یکبار اجرا میشه
-
-jobs: run-bot: runs-on: ubuntu-latest steps: - name: Checkout repository uses: actions/checkout@v2
-
-- name: Set up Python
-    uses: actions/setup-python@v2
-    with:
-      python-version: '3.10'
-
-  - name: Install dependencies
-    run: |
-      pip install requests
-
-  - name: Run bot script
-    env:
-      XT_API_KEY: ${{ secrets.XT_API_KEY }}
-      XT_API_SECRET: ${{ secrets.XT_API_SECRET }}
-    run: |
-      python auto_xt_bot.py
-
-name: Auto XT BOT
-
 on:
   schedule:
-    - cron: '*/30 * * * *' # هر ۳۰ دقیقه یکبار اجرا میشه
+    - cron: '*/30 * * * *' # هر ۳۰ دقیقه یکبار اجرا می‌شود
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.10'
+          python-version: '3.x'
 
       - name: Install dependencies
         run: |
           pip install requests
 
       - name: Run bot script
-        env:
-          XT_API_KEY: ${{ secrets.XT_API_KEY }}
-          XT_API_SECRET: ${{ secrets.XT_API_SECRET }}
         run: |
           python auto_xt_bot.py
